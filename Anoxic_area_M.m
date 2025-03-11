@@ -32,7 +32,7 @@ GAw = load('GAw_Eo.txt');
 area_layer = nan(55,1);
 area_layer(1) = 0;
 for i = 1:54
-   area_layer(i+1) = (GAw(i)-GAw(i+1))/GAw(1);
+   area_layer(i+1) = (GAw(i)-GAw(i+1))/GAw(1); % obtain seafloor area of each layer  
 end
 
 area_layer_matrix = repmat(area_layer,1,length(x));
@@ -42,8 +42,8 @@ figure("Position",[0,0,1000,300])
 axes(h(1))
 for i = 20:20:120
 area_layer_matrix_1 = area_layer_matrix;
-area_layer_matrix_1(Z>=i) = 0; % 0.2 ml/mol: 8.93 mmol/m3; 0.5 ml/mol: 22.3 mmol/m3
-area_anox_1 = sum(area_layer_matrix_1)*100;
+area_layer_matrix_1(Z>=i) = 0; % selected data under the threshold of O2 concentration; % 0.2 ml/mol: 8.93 mmol/m3; 0.5 ml/mol: 22.3 mmol/m3
+area_anox_1 = sum(area_layer_matrix_1)*100; % calclated total seafloor anoxic area in specifield time;
 plot(st/1e3,area_anox_1, "LineWidth",1.2); hold on
 xlabel("Time (kyr)");
 ylabel("Area fraction (%)");
